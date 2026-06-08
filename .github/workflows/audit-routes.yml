@@ -1,0 +1,28 @@
+name: Audit route plans
+
+on:
+  pull_request:
+    paths:
+      - "routes/**/*.json"
+      - "examples/**/*.json"
+      - ".github/workflows/audit-routes.yml"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install .
+      - name: Audit every committed route plan
+        shell: bash
+        run: |
+          shopt -s globstar nullglob
+          files=(routes/**/*.json examples/**/*.json)
+          for route in "${files[@]}"; do
+            mapflow-lint audit --strict "$route"
+          done
+

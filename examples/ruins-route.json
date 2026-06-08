@@ -1,0 +1,27 @@
+{
+  "name": "Sunken Archive",
+  "genre": "ruins",
+  "nodes": [
+    {"id": "entrance", "type": "entrance", "label": "Collapsed archive entrance"},
+    {"id": "read", "type": "exploration", "label": "Readable central landmark"},
+    {"id": "pressure", "type": "encounter", "label": "First guarded crossing"},
+    {"id": "branch", "type": "puzzle", "label": "Optional mechanism room"},
+    {"id": "reward", "type": "reward", "label": "Lore and upgrade reward"},
+    {"id": "escalation", "type": "elite", "label": "Archive guardian"},
+    {"id": "safe", "type": "safe", "label": "Recovery chamber"},
+    {"id": "boss", "type": "boss", "label": "Vault keeper"},
+    {"id": "exit", "type": "exit", "label": "Shortcut to the entrance"}
+  ],
+  "edges": [
+    {"from": "entrance", "to": "read"},
+    {"from": "read", "to": "pressure"},
+    {"from": "read", "to": "branch"},
+    {"from": "branch", "to": "reward"},
+    {"from": "reward", "to": "pressure"},
+    {"from": "pressure", "to": "escalation"},
+    {"from": "escalation", "to": "safe"},
+    {"from": "safe", "to": "boss"},
+    {"from": "boss", "to": "exit"}
+  ]
+}
+
